@@ -33,7 +33,7 @@ public class Slick2D extends BasicGame {
         consola = new Console();
         cliente = new ClienteChat("127.0.0.1", "2000", consola);
         cliente.conectar();
-        p = new CollisionMap(mapa1,100,100);
+        p = new CollisionMap(mapa1, 100, 100);
         for (int a = 0; a < consola.getLength(); a++) {
             consola.setChat(a, "");
         }

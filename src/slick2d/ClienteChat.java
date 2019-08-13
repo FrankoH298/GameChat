@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.net.SocketException;
 
 /**
  *
@@ -59,7 +60,7 @@ public class ClienteChat {
             
         } catch (Exception e) {
             System.out.println("No se pudo abrir el socket " + ipServidor + ":" + puertoServidor);
-            e.printStackTrace();
+            //e.printStackTrace();
             System.exit(-1);
         }
     }
@@ -78,9 +79,16 @@ public class ClienteChat {
                     String mensaje = flujoEntrada.readLine();
                     Protocol(mensaje);
                     
-                } catch (Exception e) {
+                }
+                catch (SocketException e) {
+                    System.out.println("Servidor cerrado.");
+                    //e.printStackTrace();
+                    System.exit(0);
+                    break;
+                }
+                catch (Exception e) {
                     System.out.println("Error leyendo del servidor");
-                    e.printStackTrace();
+                    //e.printStackTrace();
                     break;
                 }
             }

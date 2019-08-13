@@ -18,6 +18,7 @@ public class map {
     private float y;
     ArrayList<Agent> entities;
     ArrayList<CollisionBorder> collisions;
+
     public void setX(float x) {
         this.x = x;
     }
@@ -29,10 +30,11 @@ public class map {
     public void addAgent(Agent agent) {
         entities.add(agent);
     }
-    
+
     public void addColision(CollisionBorder entity) {
         collisions.add(entity);
     }
+
     public float getX() {
         return x;
     }
@@ -55,7 +57,7 @@ public class map {
                     entities.get(a).CollisionBox.colisiona(entities.get(a), entities.get(b).CollisionBox);
                 }
             }
-            for (int c = 0; c < collisions.size(); c++){
+            for (int c = 0; c < collisions.size(); c++) {
                 if (entities.get(a).CollisionBox != collisions.get(c)) {
                     entities.get(a).CollisionBox.colisiona(entities.get(a), collisions.get(c));
                 }
@@ -64,7 +66,7 @@ public class map {
             entities.get(a).CollisionBox.BanderaBottom = false;
             entities.get(a).CollisionBox.BanderaRight = false;
             entities.get(a).CollisionBox.BanderaLeft = false;
-            
+
         }
     }
 
