@@ -23,7 +23,6 @@ public class Slick2D extends BasicGame {
     ClienteChat cliente;
     Console consola;
     Chat chat;
-    CollisionMap p;
 
     public Slick2D(String gamename) {
         super(gamename);
@@ -33,7 +32,6 @@ public class Slick2D extends BasicGame {
         consola = new Console();
         cliente = new ClienteChat("127.0.0.1", "2000", consola);
         cliente.conectar();
-        p = new CollisionMap(mapa1, 179, 122, 269, 190);
         for (int a = 0; a < consola.getLength(); a++) {
             consola.setChat(a, "");
         }
@@ -45,6 +43,7 @@ public class Slick2D extends BasicGame {
         bot1.init(gc);
         mapa1.init(gc);
         chat = new Chat(gc, consola, cliente);
+        mapa1.addColision(179, 122, 269, 190);
     }
 
     @Override
@@ -64,7 +63,6 @@ public class Slick2D extends BasicGame {
         bot1.render(gc, g);
         personaje.render(gc, g);
         chat.render(gc, g, personaje.CollisionBox.getX() - (chat.getWidth() / 2) + personaje.CollisionBox.getHalfX(), personaje.CollisionBox.getY() + personaje.CollisionBox.yDistance2 + (chat.getHeight() / 2));
-        p.render(gc, g);
         consola.render(gc, g, camera);
         g.drawString("X:" + Integer.toString(Math.round(personaje.getX())), personaje.getX(), personaje.getY() - 40);
         g.drawString("Y:" + Integer.toString(Math.round(personaje.getY())), personaje.getX(), personaje.getY() + 80);

@@ -14,9 +14,9 @@
         <group>
             <file>file:/E:/Documentos/GitHub/GameChat/src/slick2d/Slick2D.java</file>
             <file>file:/E:/Documentos/GitHub/GameChat/src/slick2d/Console.java</file>
-            <file>file:/E:/Documentos/GitHub/GameChat/src/slick2d/ClienteChat.java</file>
-            <file>file:/E:/Documentos/GitHub/GameChat/src/slick2d/Chat.java</file>
-            <file>file:/E:/Documentos/GitHub/GameChat/src/slick2d/Bot.java</file>
+            <file>file:/E:/Documentos/GitHub/GameChat/src/slick2d/CollisionBorder.java</file>
+            <file>file:/E:/Documentos/GitHub/GameChat/src/slick2d/map.java</file>
+            <file>file:/E:/Documentos/GitHub/GameChat/src/slick2d/CollisionMap.java</file>
         </group>
     </open-files>
 </project-private>
