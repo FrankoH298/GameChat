@@ -37,7 +37,7 @@ public class Agent {
     public Agent(float x, float y, map Mapa1) {
         this.x = x;
         this.y = y;
-        this.CollisionBox = new CollisionBorder(x, y - 20, 50, 1, 1, 50);
+        this.CollisionBox = new CollisionBorder(x, y - 20, 50, 100);
         blocked = new boolean[4];
         this.Mapa1 = Mapa1;
     }
