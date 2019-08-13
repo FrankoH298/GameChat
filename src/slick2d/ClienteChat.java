@@ -70,7 +70,23 @@ public class ClienteChat {
     }
 
     public void EnviarMensaje(String mensaje) {
-        flujoSalida.println(mensaje);
+        Commands(mensaje);
+    }
+
+    private void Commands(String mensaje) {
+        String action = mensaje.substring(1, 2);
+        String mensajeNuevo = mensaje.substring(2, mensaje.length());
+        switch (action) {
+            case "/":
+                if (mensajeNuevo.toLowerCase().equals("salir")) {
+                    consola.recibirMensaje("Cerrando cliente.");
+                    System.exit(0);
+                }
+                break;
+            default:
+                flujoSalida.println(mensaje);
+                break;
+        }
     }
 
     private class LectorRemoto implements Runnable {
@@ -82,7 +98,6 @@ public class ClienteChat {
                 try {
                     String mensaje = flujoEntrada.readLine();
                     Protocol(mensaje);
-
                 } catch (SocketException e) {
                     consola.recibirMensaje("Servidor cerrado.");
                     consola.recibirMensaje("Cerrando cliente en 2 segundos.");
@@ -103,7 +118,6 @@ public class ClienteChat {
         }
 
         private void Protocol(String mensaje) {
-
             String action = mensaje.substring(0, 1);
             mensaje = mensaje.substring(1, mensaje.length());
             switch (action) {
@@ -118,6 +132,7 @@ public class ClienteChat {
                     break;
                 case "M":
                     consola.recibirMensaje(mensaje);
+                    break;
             }
         }
     }
