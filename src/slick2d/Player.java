@@ -12,8 +12,8 @@ public class Player extends Agent {
 
     float distance;
 
-    public Player(float x, float y, map Mapa1) {
-        super(x, y, Mapa1);
+    public Player(float x, float y, map mapa1) {
+        super(x, y, mapa1);
     }
 
     public void cambiarCara(Input input) throws SlickException {
@@ -73,7 +73,7 @@ public class Player extends Agent {
         heading = 1;
         standing = false;
         sprite.update(delta);
-        Mapa1.checkCollision();
+        mapa1.checkCollision();
         if (!blocked[0]) {
             y -= distance;
             blocked[0] = false;
@@ -88,7 +88,7 @@ public class Player extends Agent {
         heading = 2;
         standing = false;
         sprite.update(delta);
-        Mapa1.checkCollision();
+        mapa1.checkCollision();
         if (!blocked[1]) {
             y += distance;
             blocked[1] = false;
@@ -103,7 +103,7 @@ public class Player extends Agent {
         heading = 3;
         standing = false;
         sprite.update(delta);
-        Mapa1.checkCollision();
+        mapa1.checkCollision();
         if (!blocked[3]) {
             x -= distance;
             blocked[3] = false;
@@ -118,7 +118,7 @@ public class Player extends Agent {
         heading = 4;
         standing = false;
         sprite.update(delta);
-        Mapa1.checkCollision();
+        mapa1.checkCollision();
         if (!blocked[2]) {
             x += distance;
             blocked[2] = false;

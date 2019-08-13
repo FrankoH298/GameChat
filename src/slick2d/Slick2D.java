@@ -14,9 +14,9 @@ import org.newdawn.slick.SlickException;
 
 public class Slick2D extends BasicGame {
 
-    map mapa1 = new map(0, 0);
-    Player personaje = new Player(0, 0, mapa1);
-    Bot bot1 = new Bot(300, 200, mapa1);
+    map mapa1;
+    Player personaje;
+    Bot bot1;
     float tempX;
     float tempY;
     Camera camera;
@@ -25,9 +25,11 @@ public class Slick2D extends BasicGame {
     Chat chat;
 
     public Slick2D(String gamename) {
+        
         super(gamename);
-        mapa1.addAgent(personaje);
-        mapa1.addAgent(bot1);
+        mapa1 = new map(0, 0);
+        personaje = new Player(0, 0, mapa1);
+        bot1 = new Bot(300, 200, mapa1);
         camera = new Camera(personaje);
         consola = new Console();
         cliente = new ClienteChat("127.0.0.1", "2000", consola);
@@ -73,7 +75,7 @@ public class Slick2D extends BasicGame {
 
     @Override
     public void keyPressed(int key, char c) {
-        System.out.println(key);
+        //System.out.println(key);
         if ((key > 1 && key < 14) || (key > 15 && key < 28) || (key > 29 && key < 42) || (key > 42 && key < 54) || (key > 70 && key < 84) || (key > 143 && key < 148) || (key == 57 || key == 55 || key == 181)) {
 
             String msg = (Character.toString(c));

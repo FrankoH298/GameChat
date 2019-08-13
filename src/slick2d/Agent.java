@@ -13,7 +13,7 @@ import org.newdawn.slick.SpriteSheet;
  */
 public class Agent {
 
-    map Mapa1;
+    map mapa1;
     int numberHead = 1;
     int heading = 2;
     String data_cara = "data/head.png";
@@ -34,12 +34,12 @@ public class Agent {
     Image headRight;
     float x, y;
 
-    public Agent(float x, float y, map Mapa1) {
+    public Agent(float x, float y, map mapa1) {
         this.x = x;
         this.y = y;
         this.CollisionBox = new CollisionBorder(x, y - 20, 50, 100);
         blocked = new boolean[4];
-        this.Mapa1 = Mapa1;
+        this.mapa1 = mapa1;
     }
 
     public void cargarAnimacion() throws SlickException {
@@ -66,6 +66,7 @@ public class Agent {
         sprite = down;
         cargarCara();
         currentHead = headDown;
+        mapa1.addAgent(this);
     }
 
     public void update(GameContainer gc, int delta) throws SlickException {
