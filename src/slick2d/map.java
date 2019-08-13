@@ -31,8 +31,8 @@ public class map {
         entities.add(agent);
     }
 
-    public void addColision(CollisionBorder entity) {
-        collisions.add(entity);
+    public void addColision(float posX, float posY, float posX2, float posY2) {
+        collisions.add(new CollisionBorder (posX, posY, posX2 - posX , posY2 - posY));
     }
 
     public float getX() {
@@ -80,6 +80,8 @@ public class map {
 
     public void render(GameContainer gc, Graphics g) throws SlickException {
         map.render(Math.round(x), Math.round(y));
-
+        for (int a = 0; a < collisions.size(); a++){
+            collisions.get(a).render(gc, g);
+        }
     }
 }

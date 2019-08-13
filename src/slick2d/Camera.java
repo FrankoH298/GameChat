@@ -6,8 +6,10 @@ public class Camera {
 
     public float camX;
     public float camY;
-
-    private Player player;
+    float screenWidth = 1280;
+    float screenHeight = 720;
+    float gameScale = 1;
+    private final Player player;
 
     public Camera(Player p) {
 
@@ -16,12 +18,19 @@ public class Camera {
     }
 
     public void update(GameContainer gc) {
+
         //System.out.println(); //25.5
         //System.out.println(player.CollisionBox.getHalfY()); //50.5
-        camX = (player.CollisionBox.lineTop.getX() + player.CollisionBox.getHalfX()) - (gc.getWidth() / 2);
+        camX = screenWidth/gameScale/2f - (player.CollisionBox.lineTop.getX() + player.CollisionBox.getHalfX()); 
+        camY = screenHeight/gameScale/2f - (player.CollisionBox.lineTop.getY() + player.CollisionBox.getHalfY()); 
+    }
 
-        camY = (player.CollisionBox.lineTop.getY() + player.CollisionBox.getHalfY()) - (gc.getHeight() / 2);
+    public float getGameScale() {
+        return gameScale;
+    }
 
+    public void setGameScale(float gameScale) {
+        this.gameScale = gameScale;
     }
 
 }
