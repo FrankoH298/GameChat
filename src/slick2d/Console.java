@@ -9,12 +9,15 @@ import org.newdawn.slick.SlickException;
  *
  * @author FrankoH
  */
-public class Console {
+public final class Console {
 
     String[] chat;
 
     public Console() {
         chat = new String[4];
+        for (int a = 0; a < getLength(); a++) {
+            setChat(a, "");
+        }
     }
 
     public String getChat(int index) {
