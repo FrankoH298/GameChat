@@ -10,18 +10,36 @@ import org.newdawn.slick.SlickException;
  * @author FrankoH
  */
 public class Player extends Agent {
+
     boolean personalization;
     float distance;
+    Camera camera;
+    Chat chat;
 
     public Player(float x, float y, map mapa1) {
         super(x, y, mapa1);
     }
 
-    public void cambiarCara(Input input) throws SlickException {
+    public void setCamera(Camera camera) {
+        this.camera = camera;
+    }
+
+    public void setChat(Chat chat) {
+        this.chat = chat;
+    }
+
+    public void cambiarCara(Input input, int delta) throws SlickException {
         if (input.isKeyPressed(Input.KEY_F)) {
-            personalization = true;
-            if (input.isKeyPressed(Input.KEY_F)){
-                personalization = false;
+            personalization = !personalization;
+            if (personalization) {
+                camera.setGameScale(2f);
+                sprite = down;
+                currentHead = headDown;
+                heading = 2;
+                standing = false;
+                sprite.update(delta);
+            } else {
+                camera.setGameScale(1f);
             }
             /*if (numberHead == 1) {
                 data_cara = "data/head2.png";
@@ -46,7 +64,8 @@ public class Player extends Agent {
                     break;
             }
             currentHead.draw();
-        */}
+             */
+        }
     }
 
     @Override
@@ -54,24 +73,30 @@ public class Player extends Agent {
         Input input = gc.getInput();
         int speed = 175;
         distance = speed * ((float) delta / 1000);
-        if (!personalization){
-            if (input.isKeyDown(Input.KEY_UP)) {
-                moveUp(delta);
-            } else if (input.isKeyDown(Input.KEY_DOWN)) {
-                moveDown(delta);
-            } else if (input.isKeyDown(Input.KEY_RIGHT)) {
-                moveRight(delta);
-            } else if (input.isKeyDown(Input.KEY_LEFT)) {
-                moveLeft(delta);
-            } else {
-                if (!standing) {
-                    standing = true;
+        if (!chat.isMostrar()) {
+            if (!personalization) {
+                if (input.isKeyDown(Input.KEY_UP)) {
+                    moveUp(delta);
+                } else if (input.isKeyDown(Input.KEY_DOWN)) {
+                    moveDown(delta);
+                } else if (input.isKeyDown(Input.KEY_RIGHT)) {
+                    moveRight(delta);
+                } else if (input.isKeyDown(Input.KEY_LEFT)) {
+                    moveLeft(delta);
+                } else {
+                    if (!standing) {
+                        standing = true;
+                    }
                 }
+            } else {
+                standing = true;
             }
+            cambiarCara(input, delta);
+        } else {
+            standing = true;
         }
         this.CollisionBox.setX(x);
         this.CollisionBox.setY(y - 20);
-        cambiarCara(input);
     }
 
     public void moveUp(int delta) {
@@ -133,6 +158,7 @@ public class Player extends Agent {
             standing = true;
         }
     }
+
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
         sprite.draw(x, y);

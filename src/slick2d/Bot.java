@@ -6,7 +6,7 @@ package slick2d;
  */
 public class Bot extends Agent {
 
-    public Bot(float x, float y, map Mapa1) {
-        super(x, y, Mapa1);
+    public Bot(float x, float y, map mapa1) {
+        super(x, y, mapa1);
     }
 }

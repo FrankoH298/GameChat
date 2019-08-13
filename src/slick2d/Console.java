@@ -48,17 +48,17 @@ public final class Console {
     public void render(GameContainer gc, Graphics g, Camera camera) throws SlickException {
         g.setAntiAlias(true);
         g.setColor(new Color(255f, 255f, 255f, 0.3f));
-        g.drawString(getChat(0), -camera.camX, -camera.camY + 580);
+        g.drawString(getChat(0), -camera.camX, -camera.camY + gc.getHeight() / camera.getGameScale() - 140);
         g.setColor(new Color(255f, 255f, 255f, 0.5f));
-        g.drawString(getChat(1), -camera.camX, -camera.camY + 600);
+        g.drawString(getChat(1), -camera.camX, -camera.camY + gc.getHeight() / camera.getGameScale() - 120);
         g.setColor(new Color(255f, 255f, 255f, 0.7f));
-        g.drawString(getChat(2), -camera.camX, -camera.camY + 620);
+        g.drawString(getChat(2), -camera.camX, -camera.camY + gc.getHeight() / camera.getGameScale() - 100);
         g.setColor(new Color(255f, 255f, 255f, 0.8f));
-        g.drawString(getChat(3), -camera.camX, -camera.camY + 640);
+        g.drawString(getChat(3), -camera.camX, -camera.camY + gc.getHeight() / camera.getGameScale() - 80);
         g.setColor(Color.white);
-        g.drawString(getChat(4), -camera.camX, -camera.camY + 660);
-        g.drawString(getChat(5), -camera.camX, -camera.camY + 680);
-        g.drawString(getChat(6), -camera.camX, -camera.camY + 700);
+        g.drawString(getChat(4), -camera.camX, -camera.camY + gc.getHeight() / camera.getGameScale() - 60);
+        g.drawString(getChat(5), -camera.camX, -camera.camY + gc.getHeight() / camera.getGameScale() - 40);
+        g.drawString(getChat(6), -camera.camX, -camera.camY + gc.getHeight() / camera.getGameScale() - 20);
         g.setColor(Color.white);
         g.setAntiAlias(false);
     }

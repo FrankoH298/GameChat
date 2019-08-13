@@ -6,6 +6,7 @@ package slick2d;
  */
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -25,15 +26,18 @@ public class Slick2D extends BasicGame {
     Chat chat;
 
     public Slick2D(String gamename) {
-        
+
         super(gamename);
         mapa1 = new map(0, 0);
         personaje = new Player(0, 0, mapa1);
-        bot1 = new Bot(300, 200, mapa1);
         camera = new Camera(personaje);
+        personaje.setCamera(camera);
+        bot1 = new Bot(300, 200, mapa1);
         consola = new Console();
-        cliente = new ClienteChat("192.168.60.177", "2000", consola);
+        cliente = new ClienteChat("127.0.0.1", "2000", consola);
         cliente.conectar();
+        chat = new Chat(cliente);
+        personaje.setChat(chat);
     }
 
     @Override
@@ -41,7 +45,7 @@ public class Slick2D extends BasicGame {
         personaje.init(gc);
         bot1.init(gc);
         mapa1.init(gc);
-        chat = new Chat(gc, consola, cliente);
+        camera.init(gc);
         mapa1.addColision(179, 122, 269, 190);
     }
 
@@ -63,28 +67,42 @@ public class Slick2D extends BasicGame {
         personaje.render(gc, g);
         chat.render(gc, g, personaje.CollisionBox.getX() - (chat.getWidth() / 2) + personaje.CollisionBox.getHalfX(), personaje.CollisionBox.getY() + personaje.CollisionBox.yDistance2 + (chat.getHeight() / 2));
         consola.render(gc, g, camera);
+        g.setAntiAlias(true);
         g.drawString("X:" + Integer.toString(Math.round(personaje.getX())), personaje.getX(), personaje.getY() - 40);
         g.drawString("Y:" + Integer.toString(Math.round(personaje.getY())), personaje.getX(), personaje.getY() + 80);
         g.drawString(Float.toString(-camera.camX + gc.getInput().getMouseX()), -camera.camX + gc.getInput().getMouseX() + 30, -camera.camY + gc.getInput().getMouseY());
         g.drawString(Float.toString(-camera.camY + gc.getInput().getMouseY()), -camera.camX + gc.getInput().getMouseX() + 30, -camera.camY + gc.getInput().getMouseY() + 20);
-
+        g.setAntiAlias(false);
     }
 
     @Override
     public void keyPressed(int key, char c) {
         //System.out.println(key);
-        if ((key > 1 && key < 14) || (key > 15 && key < 28) || (key > 29 && key < 42) || (key > 42 && key < 54) || (key > 70 && key < 84) || (key > 143 && key < 148) || (key == 57 || key == 55 || key == 181)) {
+        if (chat.isMostrar()) {
+            if ((key > 1 && key < 14) || (key > 15 && key < 28) || (key > 29 && key < 42) || (key > 42 && key < 54) || (key > 70 && key < 84) || (key > 143 && key < 148) || (key == 57 || key == 55 || key == 181)) {
 
-            String msg = (Character.toString(c));
-            chat.setText(msg);
+                String msg = (Character.toString(c));
+                chat.setText(msg);
+            }
         }
+
     }
 
     public static void main(String[] args) {
         try {
             AppGameContainer appgc;
             appgc = new AppGameContainer(new Slick2D("Juego GG"));
-            appgc.setDisplayMode(1280, 720, false);
+            boolean fullscreen = false;
+            int value = JOptionPane.showConfirmDialog(null,
+            "¿Desea ingresar en pantalla completa?",
+            "Modo de pantalla",
+            JOptionPane.YES_NO_OPTION);
+            if (value == JOptionPane.YES_OPTION) {
+                fullscreen = true;
+            } else if (value == JOptionPane.NO_OPTION) {
+                fullscreen = false;
+            }
+            appgc.setDisplayMode(appgc.getScreenWidth(), appgc.getScreenHeight(), fullscreen);
             appgc.setShowFPS(true);
             appgc.start();
         } catch (SlickException ex) {

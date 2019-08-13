@@ -149,10 +149,10 @@ public class CollisionBorder {
     }
 
     public void render(GameContainer gc, Graphics g) throws SlickException {
-        g.draw(lineTop);
-        g.draw(lineBottom);
-        g.draw(lineRight);
-        g.draw(lineLeft);
+        g.fill(lineTop);
+        g.fill(lineBottom);
+        g.fill(lineRight);
+        g.fill(lineLeft);
 
     }
 }

@@ -13,18 +13,15 @@ public class Chat {
 
     private boolean mostrar = false;
     private String text = "";
-    private Console consola;
-    Input input;
     float width = 200, height = 20;
     ClienteChat cliente;
 
-    public Chat(GameContainer gc, Console consola, ClienteChat cliente) {
-        this.consola = consola;
+    public Chat(ClienteChat cliente) {
         this.cliente = cliente;
-        input = gc.getInput();
     }
 
     public void update(GameContainer gc, int delta) throws SlickException {
+        Input input = gc.getInput();
         if (mostrar) {
             if (input.isKeyPressed(Input.KEY_RETURN)) {
                 cliente.EnviarMensaje("M" + text);
@@ -45,13 +42,19 @@ public class Chat {
 
     public void render(GameContainer gc, Graphics g, float x, float y) throws SlickException {
         if (mostrar) {
+            g.setAntiAlias(true);
             g.drawRect(x, y, width, height);
             g.drawString(text, x, y);
+            g.setAntiAlias(false);
         }
     }
 
     public void alternChat() {
         mostrar = !mostrar;
+    }
+
+    public boolean isMostrar() {
+        return mostrar;
     }
 
     public String getText() {

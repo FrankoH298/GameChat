@@ -5,7 +5,7 @@
             <url>src/slick2d/Bot.java</url>
             <bookmark id="1">
                 <name/>
-                <line>21</line>
+                <line>12</line>
                 <key/>
             </bookmark>
         </file>
@@ -13,10 +13,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/E:/Documentos/GitHub/GameChat/src/slick2d/Slick2D.java</file>
-            <file>file:/E:/Documentos/GitHub/GameChat/src/slick2d/Console.java</file>
-            <file>file:/E:/Documentos/GitHub/GameChat/src/slick2d/Agent.java</file>
-            <file>file:/E:/Documentos/GitHub/GameChat/src/slick2d/CollisionBorder.java</file>
-            <file>file:/E:/Documentos/GitHub/GameChat/src/slick2d/map.java</file>
+            <file>file:/E:/Documentos/GitHub/GameChat/src/slick2d/Chat.java</file>
             <file>file:/E:/Documentos/GitHub/GameChat/src/slick2d/Player.java</file>
         </group>
     </open-files>
