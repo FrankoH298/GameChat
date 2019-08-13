@@ -1,6 +1,7 @@
 package slick2d;
 
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
@@ -9,7 +10,7 @@ import org.newdawn.slick.SlickException;
  * @author FrankoH
  */
 public class Player extends Agent {
-
+    boolean personalization;
     float distance;
 
     public Player(float x, float y, map mapa1) {
@@ -18,7 +19,11 @@ public class Player extends Agent {
 
     public void cambiarCara(Input input) throws SlickException {
         if (input.isKeyPressed(Input.KEY_F)) {
-            if (numberHead == 1) {
+            personalization = true;
+            if (input.isKeyPressed(Input.KEY_F)){
+                personalization = false;
+            }
+            /*if (numberHead == 1) {
                 data_cara = "data/head2.png";
                 numberHead = 2;
             } else if (numberHead == 2) {
@@ -41,7 +46,7 @@ public class Player extends Agent {
                     break;
             }
             currentHead.draw();
-        }
+        */}
     }
 
     @Override
@@ -49,17 +54,19 @@ public class Player extends Agent {
         Input input = gc.getInput();
         int speed = 175;
         distance = speed * ((float) delta / 1000);
-        if (input.isKeyDown(Input.KEY_UP)) {
-            moveUp(delta);
-        } else if (input.isKeyDown(Input.KEY_DOWN)) {
-            moveDown(delta);
-        } else if (input.isKeyDown(Input.KEY_RIGHT)) {
-            moveRight(delta);
-        } else if (input.isKeyDown(Input.KEY_LEFT)) {
-            moveLeft(delta);
-        } else {
-            if (!standing) {
-                standing = true;
+        if (!personalization){
+            if (input.isKeyDown(Input.KEY_UP)) {
+                moveUp(delta);
+            } else if (input.isKeyDown(Input.KEY_DOWN)) {
+                moveDown(delta);
+            } else if (input.isKeyDown(Input.KEY_RIGHT)) {
+                moveRight(delta);
+            } else if (input.isKeyDown(Input.KEY_LEFT)) {
+                moveLeft(delta);
+            } else {
+                if (!standing) {
+                    standing = true;
+                }
             }
         }
         this.CollisionBox.setX(x);
@@ -124,6 +131,18 @@ public class Player extends Agent {
             blocked[2] = false;
         } else {
             standing = true;
+        }
+    }
+    @Override
+    public void render(GameContainer gc, Graphics g) throws SlickException {
+        sprite.draw(x, y);
+        currentHead.draw(x + 10, y - 18);
+        CollisionBox.render(gc, g);
+        if (standing && !sprite.isStopped()) {
+            sprite.stop();
+            sprite.setCurrentFrame(0);
+        } else if (sprite.isStopped() && !standing) {
+            sprite.start();
         }
     }
 }

@@ -14,7 +14,7 @@ public final class Console {
     String[] chat;
 
     public Console() {
-        chat = new String[4];
+        chat = new String[7];
         for (int a = 0; a < getLength(); a++) {
             setChat(a, "");
         }
@@ -37,23 +37,29 @@ public final class Console {
             chat[0] = chat[1];
             chat[1] = chat[2];
             chat[2] = chat[3];
-            chat[3] = msg;
+            chat[3] = chat[4];
+            chat[4] = chat[5];
+            chat[5] = chat[6];
+            chat[6] = msg;
         }
 
     }
 
     public void render(GameContainer gc, Graphics g, Camera camera) throws SlickException {
-        g.setColor(Color.lightGray);
-        g.fillRoundRect(-camera.camX, -camera.camY + 630, 300, 80, 6);
-        g.setColor(Color.black);
         g.setAntiAlias(true);
-        g.drawRoundRect(-camera.camX + 2, -camera.camY + 632, 296, 76, 4);
+        g.setColor(new Color(255f, 255f, 255f, 0.3f));
+        g.drawString(getChat(0), -camera.camX, -camera.camY + 580);
+        g.setColor(new Color(255f, 255f, 255f, 0.5f));
+        g.drawString(getChat(1), -camera.camX, -camera.camY + 600);
+        g.setColor(new Color(255f, 255f, 255f, 0.7f));
+        g.drawString(getChat(2), -camera.camX, -camera.camY + 620);
+        g.setColor(new Color(255f, 255f, 255f, 0.8f));
+        g.drawString(getChat(3), -camera.camX, -camera.camY + 640);
+        g.setColor(Color.white);
+        g.drawString(getChat(4), -camera.camX, -camera.camY + 660);
+        g.drawString(getChat(5), -camera.camX, -camera.camY + 680);
+        g.drawString(getChat(6), -camera.camX, -camera.camY + 700);
+        g.setColor(Color.white);
         g.setAntiAlias(false);
-        g.setColor(Color.white);
-        g.drawString(getChat(0), -camera.camX + 2, -camera.camY + 630);
-        g.drawString(getChat(1), -camera.camX + 2, -camera.camY + 650);
-        g.drawString(getChat(2), -camera.camX + 2, -camera.camY + 670);
-        g.drawString(getChat(3), -camera.camX + 2, -camera.camY + 690);
-        g.setColor(Color.white);
     }
 }
