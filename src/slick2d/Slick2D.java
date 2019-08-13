@@ -22,6 +22,7 @@ public class Slick2D extends BasicGame {
     float tempX;
     float tempY;
     Camera camera;
+    CollisionMap p;
 
     public Slick2D(String gamename) {
         super(gamename);
@@ -30,6 +31,7 @@ public class Slick2D extends BasicGame {
         mapa1.addAgent(bot2);
         mapa1.addAgent(bot3);
         camera = new Camera(personaje);
+        p = new CollisionMap(mapa1,100,100);
         
     }
 
@@ -62,6 +64,7 @@ public class Slick2D extends BasicGame {
         personaje.render(gc, g);
         g.drawString("X:" + Integer.toString(Math.round(personaje.getX())), personaje.getX(), personaje.getY() -40);
         g.drawString("Y:" + Integer.toString(Math.round(personaje.getY())), personaje.getX(), personaje.getY() +80);
+        p.render(gc, g);
     }
 
     public static void main(String[] args) {
