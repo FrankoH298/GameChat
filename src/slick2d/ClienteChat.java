@@ -5,6 +5,9 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,18 +26,18 @@ public class ClienteChat {
     private BufferedReader flujoEntrada = null;
     // Flujo de salida de caracteres hacia el servidor.
     private PrintStream flujoSalida = null;
-    
+
     @SuppressWarnings("unused")
     private Console consola;
-    
+
     public ClienteChat(String direccionIP, String puerto, Console consola) {
-        
+
         this.consola = consola;
-        
+
         if (direccionIP != null) {
             ipServidor = direccionIP;
         }
-        
+
         if (puerto != null) {
             try {
                 puertoServidor = Integer.parseInt(puerto);
@@ -42,7 +45,7 @@ public class ClienteChat {
             }
         }
     }
-    
+
     public void conectar() {
         try {
             // se abre un socket a la dirección IP y puerto indicado .
@@ -57,20 +60,21 @@ public class ClienteChat {
             // se inicia un ciclo de lectura infinito.
             Thread t = new Thread(new LectorRemoto());
             t.start();
-            
+            EnviarMensaje("C1");
+
         } catch (Exception e) {
             System.out.println("No se pudo abrir el socket " + ipServidor + ":" + puertoServidor);
             //e.printStackTrace();
             System.exit(-1);
         }
     }
-    
+
     public void EnviarMensaje(String mensaje) {
         flujoSalida.println(mensaje);
     }
-    
+
     private class LectorRemoto implements Runnable {
-        
+
         public void run() {
             // se hace un ciclo infinito leyendo todas las líneas
             // que se vayan recibiendo del servidor.
@@ -78,24 +82,28 @@ public class ClienteChat {
                 try {
                     String mensaje = flujoEntrada.readLine();
                     Protocol(mensaje);
-                    
-                }
-                catch (SocketException e) {
-                    System.out.println("Servidor cerrado.");
-                    //e.printStackTrace();
+
+                } catch (SocketException e) {
+                    consola.recibirMensaje("Servidor cerrado.");
+                    consola.recibirMensaje("Cerrando cliente en 2 segundos.");
+                    try {
+                        //e.printStackTrace();
+                        TimeUnit.SECONDS.sleep(2);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(ClienteChat.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     System.exit(0);
                     break;
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     System.out.println("Error leyendo del servidor");
                     //e.printStackTrace();
                     break;
                 }
             }
         }
-        
+
         private void Protocol(String mensaje) {
-            
+
             String action = mensaje.substring(0, 1);
             mensaje = mensaje.substring(1, mensaje.length());
             switch (action) {
@@ -113,5 +121,5 @@ public class ClienteChat {
             }
         }
     }
-    
+
 }
