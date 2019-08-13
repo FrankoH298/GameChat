@@ -5,11 +5,9 @@ package slick2d;
  * @author FrankoH
  */
 import java.util.ArrayList;
-import java.util.List;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.tiled.TiledMap;
 
 public class map {
@@ -27,7 +25,6 @@ public class map {
     public void setY(float y) {
         this.y = y;
     }
-    List<Rectangle> collisionList = new ArrayList<Rectangle>();
 
     public void addAgent(Agent agent) {
         entities.add(agent);

@@ -17,29 +17,32 @@ public class Slick2D extends BasicGame {
     map mapa1 = new map(0, 0);
     Player personaje = new Player(0, 0, mapa1);
     Bot bot1 = new Bot(300, 200, mapa1);
-    Bot bot2 = new Bot(300, 405, mapa1);
-    Bot bot3 = new Bot(360, 300, mapa1);
     float tempX;
     float tempY;
     Camera camera;
+    ClienteChat cliente;
+    Console consola;
+    Chat chat;
 
     public Slick2D(String gamename) {
         super(gamename);
         mapa1.addAgent(personaje);
         mapa1.addAgent(bot1);
-        mapa1.addAgent(bot2);
-        mapa1.addAgent(bot3);
         camera = new Camera(personaje);
-        
+        consola = new Console();
+        cliente = new ClienteChat("127.0.0.1", "2000", consola);
+        cliente.conectar();
+        for (int a = 0; a < consola.getLength(); a++) {
+            consola.setChat(a, "");
+        }
     }
 
     @Override
     public void init(GameContainer gc) throws SlickException {
         personaje.init(gc);
         bot1.init(gc);
-        bot2.init(gc);
-        bot3.init(gc);
         mapa1.init(gc);
+        chat = new Chat(gc, consola, cliente);
     }
 
     @Override
@@ -47,9 +50,8 @@ public class Slick2D extends BasicGame {
         mapa1.update(gc, delta);
         personaje.update(gc, delta);
         bot1.update(gc, delta);
-        bot2.update(gc, delta);
-        bot3.update(gc, delta);
         camera.update(gc);
+        chat.update(gc, delta);
     }
 
     @Override
@@ -57,11 +59,26 @@ public class Slick2D extends BasicGame {
         g.translate(-camera.camX, -camera.camY);
         mapa1.render(gc, g);
         bot1.render(gc, g);
-        bot2.render(gc, g);
-        bot3.render(gc, g);
         personaje.render(gc, g);
-        g.drawString("X:" + Integer.toString(Math.round(personaje.getX())), personaje.getX(), personaje.getY() -40);
-        g.drawString("Y:" + Integer.toString(Math.round(personaje.getY())), personaje.getX(), personaje.getY() +80);
+        chat.render(gc, g, personaje.CollisionBox.getX() - (chat.getWidth() / 2) + personaje.CollisionBox.getHalfX(), personaje.CollisionBox.getY() + personaje.CollisionBox.yDistance2 + (chat.getHeight() / 2));
+        g.drawString("X:" + Integer.toString(Math.round(personaje.getX())), personaje.getX(), personaje.getY() - 40);
+        g.drawString("Y:" + Integer.toString(Math.round(personaje.getY())), personaje.getX(), personaje.getY() + 80);
+        g.drawString(consola.getChat(0), camera.camX, camera.camY + 640);
+        g.drawString(consola.getChat(1), camera.camX, camera.camY + 660);
+        g.drawString(consola.getChat(2), camera.camX, camera.camY + 680);
+        g.drawString(consola.getChat(3), camera.camX, camera.camY + 700);
+        g.drawRect(camera.camX, camera.camY + 640, 300, 80);
+
+    }
+
+    @Override
+    public void keyPressed(int key, char c) {
+        System.out.println(key);
+        if ((key > 1 && key < 14) || (key > 15 && key < 28) || (key > 29 && key < 42) || (key > 42 && key < 54) || (key > 70 && key < 84) || (key > 143 && key < 148) || (key == 57 || key == 55 || key == 181)) {
+
+            String msg = (Character.toString(c));
+            chat.setText(msg);
+        }
     }
 
     public static void main(String[] args) {

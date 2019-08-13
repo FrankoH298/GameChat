@@ -24,13 +24,14 @@ public class CollisionBorder {
     float yDistance1;
     float xDistance2;
     float yDistance2;
-    float halfX,halfY;
+    float halfX, halfY;
 
     public float getHalfX() {
-        return (lineRight.getX() - lineLeft.getX()) /2;
+        return (lineRight.getX() - lineLeft.getX()) / 2;
     }
+
     public float getHalfY() {
-        return (lineBottom.getY() - lineTop.getY()) /2;
+        return (lineBottom.getY() - lineTop.getY()) / 2;
     }
 
     public CollisionBorder(float x, float y, float xDistance1, float yDistance1, float xDistance2, float yDistance2) {
