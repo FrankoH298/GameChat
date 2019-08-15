@@ -26,7 +26,7 @@ public class ClienteChat {
 
     @SuppressWarnings("unused")
     private final Console consola;
-    private Slick2D slick;
+    private final Slick2D slick;
 
     public ClienteChat(String direccionIP, String puerto, Console consola, Slick2D slick) {
         this.slick = slick;
@@ -81,7 +81,7 @@ public class ClienteChat {
                     flujoSalida.println(mensaje);
                     break;
             }
-        }else{
+        } else {
             flujoSalida.println(mensaje);
         }
     }
@@ -92,11 +92,10 @@ public class ClienteChat {
         public void run() {
             // se hace un ciclo infinito leyendo todas las líneas
             // que se vayan recibiendo del servidor.
-            //EnviarMensaje("D0@0@");
             while (true) {
                 try {
                     String mensaje = flujoEntrada.readLine();
-                    System.out.println(mensaje);
+                    //System.out.println(mensaje);
                     Protocol(mensaje);
                 } catch (SocketException e) {
                     consola.recibirMensaje("Servidor cerrado.");
@@ -172,6 +171,9 @@ public class ClienteChat {
                             }
                         }
                         slick.updateBot(userIndex, x, y);
+                        break;
+                    case "G":
+                        slick.removeBot(Integer.parseInt(mensaje));
                         break;
                     default:
                         break;

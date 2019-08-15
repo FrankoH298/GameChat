@@ -48,7 +48,7 @@ public class Slick2D extends BasicGame {
         mapa1.init(gc);
         camera.init(gc);
         mapa1.addColision(179, 122, 269, 190);
-        cliente.EnviarMensaje("D");
+        cliente.EnviarMensaje("C");
     }
 
     @Override
@@ -61,7 +61,7 @@ public class Slick2D extends BasicGame {
             }
         }*/
         for (int i = 0; i < bots.length; i++) {
-            if (bots[i] != null){
+            if (bots[i] != null) {
                 bots[i].update(gc, delta);
             }
         }
@@ -80,7 +80,7 @@ public class Slick2D extends BasicGame {
             }
         }*/
         for (int i = 0; i < bots.length; i++) {
-            if (bots[i] != null){
+            if (bots[i] != null) {
                 bots[i].render(gc, g);
             }
         }
@@ -113,9 +113,14 @@ public class Slick2D extends BasicGame {
         bots[userIndex] = new Bot(x, y, this);
     }
 
+    public void removeBot(int userIndex) {
+        bots[userIndex].remove();
+        bots[userIndex] = null;
+    }
+
     public void updateBot(int userIndex, float x, float y) {
         //bots.get().updatePlayer(x, y);
-        if (bots[userIndex] != null){
+        if (bots[userIndex] != null) {
             bots[userIndex].updatePlayer(x, y);
         }
     }

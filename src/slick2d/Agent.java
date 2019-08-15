@@ -34,7 +34,7 @@ public class Agent {
     Image headRight;
     float x, y;
     private boolean initialized;
-    
+
     public Agent(float x, float y, Slick2D slick) {
         this.x = x;
         this.y = y;
@@ -42,7 +42,7 @@ public class Agent {
         blocked = new boolean[4];
         this.mapa1 = slick.mapa1;
     }
-    
+
     public boolean isInitialized() {
         return initialized;
     }
@@ -78,8 +78,12 @@ public class Agent {
         mapa1.addAgent(this);
     }
 
+    public void remove() {
+        mapa1.entities.remove(this);
+    }
+
     public void update(GameContainer gc, int delta) throws SlickException {
-        if (!isInitialized()){
+        if (!isInitialized()) {
             init(gc);
             setInitialized(true);
         }
@@ -103,7 +107,7 @@ public class Agent {
     }
 
     public void render(GameContainer gc, Graphics g) throws SlickException {
-        if (!isInitialized()){
+        if (!isInitialized()) {
             init(gc);
             setInitialized(true);
         }
