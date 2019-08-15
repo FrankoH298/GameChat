@@ -29,19 +29,20 @@ public class Player extends Agent {
     }
 
     public void cambiarCara(Input input, int delta) throws SlickException {
-        if (input.isKeyPressed(Input.KEY_F)) {
-            personalization = !personalization;
-            if (personalization) {
-                camera.setGameScale(2f);
-                sprite = down;
-                currentHead = headDown;
-                heading = 2;
-                standing = false;
-                sprite.update(delta);
-            } else {
-                camera.setGameScale(1f);
-            }
-            /*if (numberHead == 1) {
+        if (!chat.isMostrar()) {
+            if (input.isKeyPressed(Input.KEY_F)) {
+                personalization = !personalization;
+                if (personalization) {
+                    camera.setGameScale(2f);
+                    sprite = down;
+                    currentHead = headDown;
+                    heading = 2;
+                    standing = false;
+                    sprite.update(delta);
+                } else {
+                    camera.setGameScale(1f);
+                }
+                /*if (numberHead == 1) {
                 data_cara = "data/head2.png";
                 numberHead = 2;
             } else if (numberHead == 2) {
@@ -64,7 +65,8 @@ public class Player extends Agent {
                     break;
             }
             currentHead.draw();
-             */
+                 */
+            }
         }
     }
 
@@ -171,4 +173,5 @@ public class Player extends Agent {
             sprite.start();
         }
     }
+
 }

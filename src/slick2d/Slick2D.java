@@ -70,8 +70,8 @@ public class Slick2D extends BasicGame {
         g.setAntiAlias(true);
         g.drawString("X:" + Integer.toString(Math.round(personaje.getX())), personaje.getX(), personaje.getY() - 40);
         g.drawString("Y:" + Integer.toString(Math.round(personaje.getY())), personaje.getX(), personaje.getY() + 80);
-        g.drawString(Float.toString(-camera.camX + gc.getInput().getMouseX()), -camera.camX + gc.getInput().getMouseX() + 30, -camera.camY + gc.getInput().getMouseY());
-        g.drawString(Float.toString(-camera.camY + gc.getInput().getMouseY()), -camera.camX + gc.getInput().getMouseX() + 30, -camera.camY + gc.getInput().getMouseY() + 20);
+        g.drawString(Float.toString(-camera.camX + gc.getInput().getMouseX()), -camera.camX + gc.getInput().getMouseX() / camera.getGameScale() + 30, -camera.camY + gc.getInput().getMouseY() / camera.getGameScale());
+        g.drawString(Float.toString(-camera.camY + gc.getInput().getMouseY()), -camera.camX + gc.getInput().getMouseX() / camera.getGameScale() + 30, -camera.camY + gc.getInput().getMouseY() / camera.getGameScale() + 20);
         g.setAntiAlias(false);
     }
 
@@ -94,15 +94,60 @@ public class Slick2D extends BasicGame {
             appgc = new AppGameContainer(new Slick2D("Juego GG"));
             boolean fullscreen = false;
             int value = JOptionPane.showConfirmDialog(null,
-            "¿Desea ingresar en pantalla completa?",
-            "Modo de pantalla",
-            JOptionPane.YES_NO_OPTION);
+                    "¿Desea ingresar en pantalla completa?",
+                    "Modo de pantalla",
+                    JOptionPane.YES_NO_OPTION);
             if (value == JOptionPane.YES_OPTION) {
                 fullscreen = true;
             } else if (value == JOptionPane.NO_OPTION) {
                 fullscreen = false;
             }
-            appgc.setDisplayMode(appgc.getScreenWidth(), appgc.getScreenHeight(), fullscreen);
+            String resNativa = appgc.getScreenWidth() + "x" + appgc.getScreenHeight();
+            String[] pos = {resNativa + " (Nativo)",
+                "1920x1080",
+                "1600x900",
+                "1280x720",
+                "800x600"};
+            String s = (String) JOptionPane.showInputDialog(
+                    null,
+                    "Elija la resolucion: ",
+                    "Selector de resolucion",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    pos,
+                    pos);
+            if (s != null) {
+                switch (s) {
+                    case "1920x1080":
+                        appgc.setDisplayMode(1920, 1080, fullscreen);
+                        System.out.println("1080");
+                        break;
+                    case "1600x900":
+                        appgc.setDisplayMode(1600, 900, fullscreen);
+                        System.out.println("900");
+                        break;
+                    case "1280x720":
+                        appgc.setDisplayMode(1280, 720, fullscreen);
+                        System.out.println("720");
+                        break;
+                    case "800x600":
+                        appgc.setDisplayMode(800, 600, fullscreen);
+                        System.out.println("600");
+                        break;
+                    default:
+                        try {
+                            appgc.setDisplayMode(appgc.getScreenWidth(), appgc.getScreenHeight(), fullscreen);
+                            System.out.println("Nativa");
+                        } catch (SlickException e) {
+                            System.out.println("Resolucion nativa no permitida");
+                            System.exit(0);
+                        }
+                        break;
+                }
+            } else {
+                System.exit(0);
+            }
+
             appgc.setShowFPS(true);
             appgc.start();
         } catch (SlickException ex) {

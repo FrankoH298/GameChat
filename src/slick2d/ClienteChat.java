@@ -1,6 +1,7 @@
 package slick2d;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
@@ -9,10 +10,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author nicolas.fanin
- */
 public class ClienteChat {
 
     // Referencia al socket de conexion con el servidor
@@ -28,7 +25,7 @@ public class ClienteChat {
     private PrintStream flujoSalida = null;
 
     @SuppressWarnings("unused")
-    private Console consola;
+    private final Console consola;
 
     public ClienteChat(String direccionIP, String puerto, Console consola) {
 
@@ -39,10 +36,7 @@ public class ClienteChat {
         }
 
         if (puerto != null) {
-            try {
-                puertoServidor = Integer.parseInt(puerto);
-            } catch (NumberFormatException nfe) {
-            }
+            puertoServidor = Integer.parseInt(puerto);
         }
     }
 
@@ -50,7 +44,6 @@ public class ClienteChat {
         try {
             // se abre un socket a la dirección IP y puerto indicado .
             conexion = new Socket(ipServidor, puertoServidor);
-
             // se crea un lector de caracteres para todo lo que se reciba
             // desde el servidor por el socket.
             flujoEntrada = new BufferedReader(new InputStreamReader(conexion.getInputStream()));
@@ -62,7 +55,7 @@ public class ClienteChat {
             t.start();
             EnviarMensaje("C1");
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println("No se pudo abrir el socket " + ipServidor + ":" + puertoServidor);
             //e.printStackTrace();
             System.exit(-1);
@@ -74,23 +67,26 @@ public class ClienteChat {
     }
 
     private void Commands(String mensaje) {
-        String action = mensaje.substring(1, 2);
-        String mensajeNuevo = mensaje.substring(2, mensaje.length());
-        switch (action) {
-            case "/":
-                if (mensajeNuevo.toLowerCase().equals("salir")) {
-                    consola.recibirMensaje("Cerrando cliente.");
-                    System.exit(0);
-                }
-                break;
-            default:
-                flujoSalida.println(mensaje);
-                break;
+        if (mensaje.length() > 1) {
+            String action = mensaje.substring(1, 2);
+            String mensajeNuevo = mensaje.substring(2, mensaje.length());
+            switch (action) {
+                case "/":
+                    if (mensajeNuevo.toLowerCase().equals("salir")) {
+                        consola.recibirMensaje("Cerrando cliente.");
+                        System.exit(0);
+                    }
+                    break;
+                default:
+                    flujoSalida.println(mensaje);
+                    break;
+            }
         }
     }
 
     private class LectorRemoto implements Runnable {
 
+        @Override
         public void run() {
             // se hace un ciclo infinito leyendo todas las líneas
             // que se vayan recibiendo del servidor.
@@ -109,7 +105,7 @@ public class ClienteChat {
                     }
                     System.exit(0);
                     break;
-                } catch (Exception e) {
+                } catch (IOException e) {
                     System.out.println("Error leyendo del servidor");
                     //e.printStackTrace();
                     break;
