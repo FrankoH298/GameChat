@@ -70,8 +70,8 @@ public class Slick2D extends BasicGame {
         g.setAntiAlias(true);
         g.drawString("X:" + Integer.toString(Math.round(personaje.getX())), personaje.getX(), personaje.getY() - 40);
         g.drawString("Y:" + Integer.toString(Math.round(personaje.getY())), personaje.getX(), personaje.getY() + 80);
-        g.drawString(Float.toString(-camera.camX + gc.getInput().getMouseX()), -camera.camX + gc.getInput().getMouseX() / camera.getGameScale() + 30, -camera.camY + gc.getInput().getMouseY() / camera.getGameScale());
-        g.drawString(Float.toString(-camera.camY + gc.getInput().getMouseY()), -camera.camX + gc.getInput().getMouseX() / camera.getGameScale() + 30, -camera.camY + gc.getInput().getMouseY() / camera.getGameScale() + 20);
+        g.drawString(Float.toString(-camera.camX + gc.getInput().getMouseX() / camera.getGameScale()), -camera.camX + gc.getInput().getMouseX() / camera.getGameScale() + 30, -camera.camY + gc.getInput().getMouseY() / camera.getGameScale());
+        g.drawString(Float.toString(-camera.camY + gc.getInput().getMouseY() / camera.getGameScale()), -camera.camX + gc.getInput().getMouseX() / camera.getGameScale() + 30, -camera.camY + gc.getInput().getMouseY() / camera.getGameScale() + 20);
         g.setAntiAlias(false);
     }
 
