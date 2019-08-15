@@ -33,13 +33,22 @@ public class Agent {
     Image headLeft;
     Image headRight;
     float x, y;
-
-    public Agent(float x, float y, map mapa1) {
+    private boolean initialized;
+    
+    public Agent(float x, float y, Slick2D slick) {
         this.x = x;
         this.y = y;
         this.CollisionBox = new CollisionBorder(x, y - 20, 50, 100);
         blocked = new boolean[4];
-        this.mapa1 = mapa1;
+        this.mapa1 = slick.mapa1;
+    }
+    
+    public boolean isInitialized() {
+        return initialized;
+    }
+
+    public void setInitialized(boolean initialized) {
+        this.initialized = initialized;
     }
 
     public void cargarAnimacion() throws SlickException {
@@ -70,6 +79,10 @@ public class Agent {
     }
 
     public void update(GameContainer gc, int delta) throws SlickException {
+        if (!isInitialized()){
+            init(gc);
+            setInitialized(true);
+        }
         if (!standing) {
             standing = true;
         }
@@ -90,6 +103,10 @@ public class Agent {
     }
 
     public void render(GameContainer gc, Graphics g) throws SlickException {
+        if (!isInitialized()){
+            init(gc);
+            setInitialized(true);
+        }
         sprite.draw(x, y);
         currentHead.draw(x + 10, y - 18);
         CollisionBox.render(gc, g);

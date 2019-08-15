@@ -26,9 +26,10 @@ public class ClienteChat {
 
     @SuppressWarnings("unused")
     private final Console consola;
+    private Slick2D slick;
 
-    public ClienteChat(String direccionIP, String puerto, Console consola) {
-
+    public ClienteChat(String direccionIP, String puerto, Console consola, Slick2D slick) {
+        this.slick = slick;
         this.consola = consola;
 
         if (direccionIP != null) {
@@ -53,7 +54,6 @@ public class ClienteChat {
             // se inicia un ciclo de lectura infinito.
             Thread t = new Thread(new LectorRemoto());
             t.start();
-            EnviarMensaje("C1");
 
         } catch (IOException e) {
             System.out.println("No se pudo abrir el socket " + ipServidor + ":" + puertoServidor);
@@ -81,6 +81,8 @@ public class ClienteChat {
                     flujoSalida.println(mensaje);
                     break;
             }
+        }else{
+            flujoSalida.println(mensaje);
         }
     }
 
@@ -90,9 +92,11 @@ public class ClienteChat {
         public void run() {
             // se hace un ciclo infinito leyendo todas las líneas
             // que se vayan recibiendo del servidor.
+            //EnviarMensaje("D0@0@");
             while (true) {
                 try {
                     String mensaje = flujoEntrada.readLine();
+                    System.out.println(mensaje);
                     Protocol(mensaje);
                 } catch (SocketException e) {
                     consola.recibirMensaje("Servidor cerrado.");
@@ -114,23 +118,65 @@ public class ClienteChat {
         }
 
         private void Protocol(String mensaje) {
+            int index = 0;
+            int temp = 0;
+            int userIndex = 0;
+            float x = 0;
+            float y = 0;
+            float msg = 0f;
             String action = mensaje.substring(0, 1);
             mensaje = mensaje.substring(1, mensaje.length());
-            switch (action) {
-                case "C":
-                    switch (Integer.parseInt(mensaje)) {
-                        case 1:
-                            System.out.println("Movio");
-                            break;
-                    }
-                    break;
-                default:
-                    break;
-                case "M":
-                    consola.recibirMensaje(mensaje);
-                    break;
+            if (mensaje != null) {
+                switch (action) {
+                    case "M":
+                        consola.recibirMensaje(mensaje);
+                        break;
+                    case "D":
+                        for (int i = 0; i < mensaje.length(); i++) {
+                            if (mensaje.charAt(i) == '@') {
+                                msg = Float.parseFloat(mensaje.substring(index, i));
+                                index = i + 1;
+                                temp++;
+                            }
+                            switch (temp) {
+                                case 1:
+                                    userIndex = Math.round(msg);
+                                    break;
+                                case 2:
+                                    x = msg;
+                                    break;
+                                case 3:
+                                    y = msg;
+                                    break;
+                            }
+                        }
+                        slick.createBot(userIndex, x, y);
+                        break;
+                    case "N":
+                        for (int i = 0; i < mensaje.length(); i++) {
+                            if (mensaje.charAt(i) == '@') {
+                                msg = Float.parseFloat(mensaje.substring(index, i));
+                                index = i + 1;
+                                temp++;
+                            }
+                            switch (temp) {
+                                case 1:
+                                    userIndex = Math.round(msg);
+                                    break;
+                                case 2:
+                                    x = msg;
+                                    break;
+                                case 3:
+                                    y = msg;
+                                    break;
+                            }
+                        }
+                        slick.updateBot(userIndex, x, y);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }
-
 }

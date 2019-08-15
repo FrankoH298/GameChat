@@ -33,7 +33,7 @@ public final class Console {
     }
 
     public void recibirMensaje(String msg) {
-        if (msg.length() > 1 && !msg.equals("")) {
+        if (msg.length() > 0 && !msg.equals("")) {
             chat[0] = chat[1];
             chat[1] = chat[2];
             chat[2] = chat[3];

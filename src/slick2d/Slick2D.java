@@ -4,6 +4,7 @@ package slick2d;
  *
  * @author FrankoH
  */
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -17,24 +18,23 @@ public class Slick2D extends BasicGame {
 
     map mapa1;
     Player personaje;
-    Bot bot1;
     float tempX;
     float tempY;
     Camera camera;
     ClienteChat cliente;
     Console consola;
     Chat chat;
+    Bot[] bots;
 
     public Slick2D(String gamename) {
 
         super(gamename);
         mapa1 = new map(0, 0);
-        personaje = new Player(0, 0, mapa1);
+        personaje = new Player(0, 0, this);
         camera = new Camera(personaje);
         personaje.setCamera(camera);
-        bot1 = new Bot(300, 200, mapa1);
         consola = new Console();
-        cliente = new ClienteChat("127.0.0.1", "2000", consola);
+        cliente = new ClienteChat("127.0.0.1", "2000", consola, this);
         cliente.conectar();
         chat = new Chat(cliente);
         personaje.setChat(chat);
@@ -42,18 +42,29 @@ public class Slick2D extends BasicGame {
 
     @Override
     public void init(GameContainer gc) throws SlickException {
+        gc.setAlwaysRender(true);
+        bots = new Bot[10];
         personaje.init(gc);
-        bot1.init(gc);
         mapa1.init(gc);
         camera.init(gc);
         mapa1.addColision(179, 122, 269, 190);
+        cliente.EnviarMensaje("D");
     }
 
     @Override
     public void update(GameContainer gc, int delta) throws SlickException {
         mapa1.update(gc, delta);
         personaje.update(gc, delta);
-        bot1.update(gc, delta);
+        /*for (int i = 0; i < bots.size(); i++) {
+            if (bots.get(i) != null) {
+                bots.get(i).update(gc, delta);
+            }
+        }*/
+        for (int i = 0; i < bots.length; i++) {
+            if (bots[i] != null){
+                bots[i].update(gc, delta);
+            }
+        }
         camera.update(gc);
         chat.update(gc, delta);
     }
@@ -63,7 +74,16 @@ public class Slick2D extends BasicGame {
         g.scale(camera.getGameScale(), camera.getGameScale());
         g.translate(camera.camX, camera.camY);
         mapa1.render(gc, g);
-        bot1.render(gc, g);
+        /*for (int i = 0; i < bots.size(); i++) {
+            if (bots.get(i) != null) {
+                bots.get(i).render(gc, g);
+            }
+        }*/
+        for (int i = 0; i < bots.length; i++) {
+            if (bots[i] != null){
+                bots[i].render(gc, g);
+            }
+        }
         personaje.render(gc, g);
         chat.render(gc, g, personaje.CollisionBox.getX() - (chat.getWidth() / 2) + personaje.CollisionBox.getHalfX(), personaje.CollisionBox.getY() + personaje.CollisionBox.yDistance2 + (chat.getHeight() / 2));
         consola.render(gc, g, camera);
@@ -86,6 +106,18 @@ public class Slick2D extends BasicGame {
             }
         }
 
+    }
+
+    public void createBot(int userIndex, float x, float y) {
+        //bots.add(new Bot(x, y, this));
+        bots[userIndex] = new Bot(x, y, this);
+    }
+
+    public void updateBot(int userIndex, float x, float y) {
+        //bots.get().updatePlayer(x, y);
+        if (bots[userIndex] != null){
+            bots[userIndex].updatePlayer(x, y);
+        }
     }
 
     public static void main(String[] args) {
@@ -147,7 +179,6 @@ public class Slick2D extends BasicGame {
             } else {
                 System.exit(0);
             }
-
             appgc.setShowFPS(true);
             appgc.start();
         } catch (SlickException ex) {

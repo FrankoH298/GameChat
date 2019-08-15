@@ -15,9 +15,11 @@ public class Player extends Agent {
     float distance;
     Camera camera;
     Chat chat;
+    Slick2D slick;
 
-    public Player(float x, float y, map mapa1) {
-        super(x, y, mapa1);
+    public Player(float x, float y, Slick2D slick) {
+        super(x, y, slick);
+        this.slick = slick;
     }
 
     public void setCamera(Camera camera) {
@@ -110,6 +112,7 @@ public class Player extends Agent {
         mapa1.checkCollision();
         if (!blocked[0]) {
             y -= distance;
+            slick.cliente.EnviarMensaje("N" + this.x + "@" + this.y + "@");
             blocked[0] = false;
         } else {
             standing = true;
@@ -126,6 +129,7 @@ public class Player extends Agent {
         if (!blocked[1]) {
             y += distance;
             blocked[1] = false;
+            slick.cliente.EnviarMensaje("N" + this.x + "@" + this.y + "@");
         } else {
             standing = true;
         }
@@ -141,6 +145,7 @@ public class Player extends Agent {
         if (!blocked[3]) {
             x -= distance;
             blocked[3] = false;
+            slick.cliente.EnviarMensaje("N" + this.x + "@" + this.y + "@");
         } else {
             standing = true;
         }
@@ -156,6 +161,7 @@ public class Player extends Agent {
         if (!blocked[2]) {
             x += distance;
             blocked[2] = false;
+            slick.cliente.EnviarMensaje("N" + this.x + "@" + this.y + "@");
         } else {
             standing = true;
         }
