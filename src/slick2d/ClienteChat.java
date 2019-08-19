@@ -15,9 +15,9 @@ public class ClienteChat {
     // Referencia al socket de conexion con el servidor
     private Socket conexion = null;
     // Direccion IP del servidor de chat.
-    private String ipServidor = "127.0.0.1";
+    private String ipServidor = "190.17.221.184";
     // Puerto TCP del servidor de chat (chat room)
-    private int puertoServidor = 2000;
+    private int puertoServidor = 25565;
 
     // Flujo de Entradade caracteres desde el servidor.
     private BufferedReader flujoEntrada = null;
