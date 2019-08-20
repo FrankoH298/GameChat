@@ -15,17 +15,18 @@ import org.newdawn.slick.SpriteSheet;
  * @author FrankoH
  */
 public class Player extends Agent {
+
     boolean personalization;
     float distance;
     Camera camera;
     Chat chat;
     Slick2D slick;
-    Image flecha;
+    Image flechad;
+    Image flechai;
 
     public Player(float x, float y, Slick2D slick) {
         super(x, y, slick);
         this.slick = slick;
-        
 
     }
 
@@ -36,7 +37,8 @@ public class Player extends Agent {
         cargarCara();
         currentHead = headDown;
         mapa1.addAgent(this);
-        flecha = new Image("data/flecha1.png");
+        flechad = new Image("data/flecha.png");
+        flechai = new Image("data/flecha.png");
     }
 
     public void setCamera(Camera camera) {
@@ -58,35 +60,55 @@ public class Player extends Agent {
                     heading = 2;
                     standing = false;
                     sprite.update(delta);
-                } else {
-                    camera.setGameScale(1f);
                 }
-                /*if (numberHead == 1) {
+            }
+            if (personalization) {
+                if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                    if (-camera.camX + input.getMouseX() / camera.getGameScale() > x - 60 && -camera.camX + input.getMouseX() / camera.getGameScale() < x  ) {
+
+                        if (true) {
+                            System.out.println("aeg");
+                            if (numberHead == 1) {
+                                data_cara = "data/head2.png";
+                                numberHead = 2;
+                            } else if (numberHead == 2) {
+                                data_cara = "data/head.png";
+                                numberHead = 1;
+                            }
+                            cargarCara();
+                            switch (heading) {
+                                case 1:
+                                    currentHead = headUp;
+                                    break;
+                                case 2:
+                                    currentHead = headDown;
+                                    break;
+                                case 3:
+                                    currentHead = headLeft;
+                                    break;
+                                case 4:
+                                    currentHead = headRight;
+                                    break;
+                            }
+                            currentHead.draw();
+                        }
+                    }
+                }
+            }
+
+        } else {
+            camera.setGameScale(1f);
+        }
+        /*if (numberHead == 1) {
                 data_cara = "data/head2.png";
                 numberHead = 2;
             } else if (numberHead == 2) {
                 data_cara = "data/head.png";
                 numberHead = 1;
             }
-            cargarCara();
-            switch (heading) {
-                case 1:
-                    currentHead = headUp;
-                    break;
-                case 2:
-                    currentHead = headDown;
-                    break;
-                case 3:
-                    currentHead = headLeft;
-                    break;
-                case 4:
-                    currentHead = headRight;
-                    break;
-            }
-            currentHead.draw();
-                 */
-            }
-        }
+            
+            
+         */
     }
 
     @Override
@@ -195,10 +217,12 @@ public class Player extends Agent {
         } else if (sprite.isStopped() && !standing) {
             sprite.start();
         }
-        if (personalization){
-            g.drawImage(flecha, 0, 0);
+        if (personalization) {
+            flechad.draw(x - 60, y);
+            flechai.setRotation(180f);
+            flechai.draw(x + 60, y);
         }
-        
+
     }
 
 }
