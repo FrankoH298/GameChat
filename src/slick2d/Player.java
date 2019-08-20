@@ -73,6 +73,7 @@ public class Player extends Agent {
             if (personalization) {
                 if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                     if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                        //flecha aribba izquierda
                         if (-camera.camX + input.getMouseX() / camera.getGameScale() > x - 60 && -camera.camX + input.getMouseX() / camera.getGameScale() < x) {
                             if (-camera.camY + input.getMouseY() / camera.getGameScale() > y - 10 && -camera.camY + input.getMouseY() / camera.getGameScale() < y + 10) {
                                 flechaispress = 1;
@@ -102,6 +103,7 @@ public class Player extends Agent {
                                 currentHead.draw();
                             }
                         }
+                        //flecha arriba derecha
                         if (-camera.camX + input.getMouseX() / camera.getGameScale() > x + 60 && -camera.camX + input.getMouseX() / camera.getGameScale() < x + 115) {
                             if (-camera.camY + input.getMouseY() / camera.getGameScale() > y - 10 && -camera.camY + input.getMouseY() / camera.getGameScale() < y + 10) {
                                 flechaispress = 2;
@@ -130,7 +132,68 @@ public class Player extends Agent {
                                 currentHead.draw();
                             }
                         }
+                        //flecha abajo derecha
+                        if (-camera.camX + input.getMouseX() / camera.getGameScale() > x - 60 && -camera.camX + input.getMouseX() / camera.getGameScale() < x) {
+                            if (-camera.camY + input.getMouseY() / camera.getGameScale() > y + 36 && -camera.camY + input.getMouseY() / camera.getGameScale() < y + 57) {
+                                flechaispress = 3;
+                                System.out.println("aeg");
+                                if (numberHead == 1) {
+                                    data_cara = "data/head2.png";
+                                    numberHead = 2;
+                                } else if (numberHead == 2) {
+                                    data_cara = "data/head.png";
+                                    numberHead = 1;
+                                }
+                                cargarCara();
+                                switch (heading) {
+                                    case 1:
+                                        currentHead = headUp;
+                                        break;
+                                    case 2:
+                                        currentHead = headDown;
+                                        break;
+                                    case 3:
+                                        currentHead = headLeft;
+                                        break;
+                                    case 4:
+                                        currentHead = headRight;
+                                        break;
+                                }
+                                currentHead.draw();
+                            }
+                        }
+                        // flecha abajo izquierda
+                        if (-camera.camX + input.getMouseX() / camera.getGameScale() > x + 60 && -camera.camX + input.getMouseX() / camera.getGameScale() < x + 115) {
+                            if (-camera.camY + input.getMouseY() / camera.getGameScale() > y + 36 && -camera.camY + input.getMouseY() / camera.getGameScale() < y + 57) {
+                                flechaispress = 4;
+                                System.out.println("aeg");
+                                if (numberHead == 1) {
+                                    data_cara = "data/head2.png";
+                                    numberHead = 2;
+                                } else if (numberHead == 2) {
+                                    data_cara = "data/head.png";
+                                    numberHead = 1;
+                                }
+                                cargarCara();
+                                switch (heading) {
+                                    case 1:
+                                        currentHead = headUp;
+                                        break;
+                                    case 2:
+                                        currentHead = headDown;
+                                        break;
+                                    case 3:
+                                        currentHead = headLeft;
+                                        break;
+                                    case 4:
+                                        currentHead = headRight;
+                                        break;
+                                }
+                                currentHead.draw();
+                            }
+                        }
                     }
+                    
                 } else {
                     flechaispress = 0;
                 }
@@ -281,10 +344,12 @@ public class Player extends Agent {
                     flechapress.draw(x + 60, y - 10);
                     break;
                 case 3:
-                    currentHead = headLeft;
+                    flechapress.setRotation(0f);
+                    flechapress.draw(x - 60, y + 30);
                     break;
                 case 4:
-                    currentHead = headRight;
+                    flechapress.setRotation(180f);
+                    flechapress.draw(x + 60, y + 30);
                     break;
             }
         }
