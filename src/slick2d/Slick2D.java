@@ -4,7 +4,6 @@ package slick2d;
  *
  * @author FrankoH
  */
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -114,7 +113,9 @@ public class Slick2D extends BasicGame {
     }
 
     public void removeBot(int userIndex) {
-        bots[userIndex].remove();
+        if (bots[userIndex] != null) {
+            bots[userIndex].remove();
+        }
         bots[userIndex] = null;
     }
 

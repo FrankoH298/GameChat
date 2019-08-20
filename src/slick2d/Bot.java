@@ -39,7 +39,7 @@ public class Bot extends Agent {
         currentHead = headUp;
         heading = 1;
         standing = false;
-        sprite.update(100);
+        //sprite.update(100);
         mapa1.checkCollision();
         if (blocked[0]) {
             standing = true;
@@ -51,7 +51,7 @@ public class Bot extends Agent {
         currentHead = headDown;
         heading = 2;
         standing = false;
-        sprite.update(100);
+        //sprite.update(100);
         if (blocked[1]) {
             standing = true;
         }
@@ -62,7 +62,7 @@ public class Bot extends Agent {
         currentHead = headLeft;
         heading = 3;
         standing = false;
-        sprite.update(100);
+        //sprite.update(100);
         if (blocked[3]) {
             standing = true;
         }
@@ -73,7 +73,7 @@ public class Bot extends Agent {
         currentHead = headRight;
         heading = 4;
         standing = false;
-        sprite.update(100);
+        //sprite.update(100);
         if (blocked[2]) {
             standing = true;
         }

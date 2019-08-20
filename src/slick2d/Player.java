@@ -1,5 +1,8 @@
 package slick2d;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.lwjgl.util.Timer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -12,7 +15,6 @@ import org.newdawn.slick.SpriteSheet;
  * @author FrankoH
  */
 public class Player extends Agent {
-
     boolean personalization;
     float distance;
     Camera camera;
