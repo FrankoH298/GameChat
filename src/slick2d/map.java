@@ -31,8 +31,8 @@ public class map {
         entities.add(agent);
     }
 
-    public void addColision(float posX, float posY, float posX2, float posY2) {
-        collisions.add(new CollisionBorder(posX, posY, posX2 - posX, posY2 - posY));
+    public void addColision(float posX, float posY, float width, float height) {
+        collisions.add(new CollisionBorder(posX, posY, width, height));
     }
 
     public float getX() {
@@ -71,11 +71,21 @@ public class map {
     }
 
     public void init(GameContainer gc) throws SlickException {
-        map = new TiledMap("data/prueba.tmx");
-    }
-
-    public void update(GameContainer gc, int delta) throws SlickException {
-
+        map = new TiledMap("data/mapa.tmx");
+        String layerValue;
+        for (int d = 0; d < map.getLayerCount(); d++) {
+            layerValue = map.getLayerProperty(d, "solid", "false");
+            if (layerValue.equals("true")) {
+                for (int a = 0; a < 200; a++) {
+                    for (int b = 0; b < 200; b++) {
+                        if (map.getTileId(a, b, d) != 0) {
+                            addColision(a * 32, b * 32, 32, 32);
+                            System.out.println(a + "+" + b);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public void render(GameContainer gc, Graphics g) throws SlickException {

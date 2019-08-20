@@ -36,8 +36,8 @@ public class CollisionBorder {
 
     public CollisionBorder(float x, float y, float xDistance1, float yDistance2) {
         this.xDistance1 = xDistance1;
-        this.yDistance1 = 1;
-        this.xDistance2 = 1;
+        this.yDistance1 = 2f;
+        this.xDistance2 = 2f;
         this.yDistance2 = yDistance2;
         this.lineTop = new Rectangle(x, y, this.xDistance1, this.yDistance1);
         this.lineBottom = new Rectangle(x, y + this.yDistance2 - this.yDistance1, this.xDistance1, this.yDistance1);
