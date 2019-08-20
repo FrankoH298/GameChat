@@ -15,9 +15,9 @@ public class ClienteChat {
     // Referencia al socket de conexion con el servidor
     private Socket conexion = null;
     // Direccion IP del servidor de chat.
-    private String ipServidor = "190.17.221.184";
+    private String ipServidor = "192.168.60.177";
     // Puerto TCP del servidor de chat (chat room)
-    private int puertoServidor = 25565;
+    private int puertoServidor = 7666;
 
     // Flujo de Entradade caracteres desde el servidor.
     private BufferedReader flujoEntrada = null;
@@ -123,9 +123,12 @@ public class ClienteChat {
             float x = 0;
             float y = 0;
             float msg = 0f;
-            String action = mensaje.substring(0, 1);
-            mensaje = mensaje.substring(1, mensaje.length());
+            String action = "";
             if (mensaje != null) {
+                if (mensaje.length() > 0) {
+                    action = mensaje.substring(0, 1);
+                    mensaje = mensaje.substring(1, mensaje.length());
+                }
                 switch (action) {
                     case "M":
                         consola.recibirMensaje(mensaje);

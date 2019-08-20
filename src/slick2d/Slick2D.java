@@ -33,7 +33,7 @@ public class Slick2D extends BasicGame {
         camera = new Camera(personaje);
         personaje.setCamera(camera);
         consola = new Console();
-        cliente = new ClienteChat("190.17.221.184", "25565", consola, this);
+        cliente = new ClienteChat("192.168.60.177", "7666", consola, this);
         cliente.conectar();
         chat = new Chat(cliente);
         personaje.setChat(chat);
