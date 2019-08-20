@@ -19,7 +19,7 @@ public class ClienteChat {
     // Puerto TCP del servidor de chat (chat room)
     private int puertoServidor = 7666;
 
-    // Flujo de Entradade caracteres desde el servidor.
+    // Flujo de Entrada de caracteres desde el servidor.
     private BufferedReader flujoEntrada = null;
     // Flujo de salida de caracteres hacia el servidor.
     private PrintStream flujoSalida = null;

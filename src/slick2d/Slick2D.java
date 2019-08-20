@@ -29,14 +29,10 @@ public class Slick2D extends BasicGame {
 
         super(gamename);
         mapa1 = new map(0, 0);
-        personaje = new Player(0, 0, this);
+        personaje = new Player(2300, 2700, this);
         camera = new Camera(personaje);
         personaje.setCamera(camera);
         consola = new Console();
-        cliente = new ClienteChat("192.168.60.177", "7666", consola, this);
-        cliente.conectar();
-        chat = new Chat(cliente);
-        personaje.setChat(chat);
     }
 
     @Override
@@ -46,13 +42,16 @@ public class Slick2D extends BasicGame {
         personaje.init(gc);
         mapa1.init(gc);
         camera.init(gc);
-        mapa1.addColision(179, 122, 269, 190);
+        cliente = new ClienteChat("192.168.60.177", "7666", consola, this);
+        cliente.conectar();
+        chat = new Chat(cliente);
+        personaje.setChat(chat);
         cliente.EnviarMensaje("C");
+        consola.recibirMensaje("Bienvenido al servidor");
     }
 
     @Override
     public void update(GameContainer gc, int delta) throws SlickException {
-        mapa1.update(gc, delta);
         personaje.update(gc, delta);
         /*for (int i = 0; i < bots.size(); i++) {
             if (bots.get(i) != null) {
