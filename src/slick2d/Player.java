@@ -2,8 +2,10 @@ package slick2d;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 
 /**
  *
@@ -16,10 +18,23 @@ public class Player extends Agent {
     Camera camera;
     Chat chat;
     Slick2D slick;
+    Image flecha;
 
     public Player(float x, float y, Slick2D slick) {
         super(x, y, slick);
         this.slick = slick;
+        
+
+    }
+
+    @Override
+    public void init(GameContainer gc) throws SlickException {
+        cargarAnimacion();
+        sprite = down;
+        cargarCara();
+        currentHead = headDown;
+        mapa1.addAgent(this);
+        flecha = new Image("data/flecha1.png");
     }
 
     public void setCamera(Camera camera) {
@@ -178,6 +193,10 @@ public class Player extends Agent {
         } else if (sprite.isStopped() && !standing) {
             sprite.start();
         }
+        if (personalization){
+            g.drawImage(flecha, 0, 0);
+        }
+        
     }
 
 }
