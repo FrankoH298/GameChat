@@ -21,8 +21,12 @@ public class Player extends Agent {
     Camera camera;
     Chat chat;
     Slick2D slick;
-    Image flechad;
-    Image flechai;
+    Image flechaderc;
+    Image flechaizqc;
+    Image flechadercu;
+    Image flechaizqcu;
+    int flechaispress;
+    Image flechapress;
 
     public Player(float x, float y, Slick2D slick) {
         super(x, y, slick);
@@ -37,8 +41,11 @@ public class Player extends Agent {
         cargarCara();
         currentHead = headDown;
         mapa1.addAgent(this);
-        flechad = new Image("data/flecha.png");
-        flechai = new Image("data/flecha.png");
+        flechapress = new Image("data/flechapress.png");
+        flechaderc = new Image("data/flecha.png");
+        flechaizqc = new Image("data/flecha.png");
+        flechadercu = new Image("data/flecha.png");
+        flechaizqcu = new Image("data/flecha.png");
     }
 
     public void setCamera(Camera camera) {
@@ -62,41 +69,75 @@ public class Player extends Agent {
                     sprite.update(delta);
                 }
             }
-            if (personalization) {
-                if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                    if (-camera.camX + input.getMouseX() / camera.getGameScale() > x - 60 && -camera.camX + input.getMouseX() / camera.getGameScale() < x  ) {
 
-                        if (true) {
-                            System.out.println("aeg");
-                            if (numberHead == 1) {
-                                data_cara = "data/head2.png";
-                                numberHead = 2;
-                            } else if (numberHead == 2) {
-                                data_cara = "data/head.png";
-                                numberHead = 1;
+            if (personalization) {
+                if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+                    if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                        if (-camera.camX + input.getMouseX() / camera.getGameScale() > x - 60 && -camera.camX + input.getMouseX() / camera.getGameScale() < x) {
+                            if (-camera.camY + input.getMouseY() / camera.getGameScale() > y - 10 && -camera.camY + input.getMouseY() / camera.getGameScale() < y + 10) {
+                                flechaispress = 1;
+                                System.out.println("aeg");
+                                if (numberHead == 1) {
+                                    data_cara = "data/head2.png";
+                                    numberHead = 2;
+                                } else if (numberHead == 2) {
+                                    data_cara = "data/head.png";
+                                    numberHead = 1;
+                                }
+                                cargarCara();
+                                switch (heading) {
+                                    case 1:
+                                        currentHead = headUp;
+                                        break;
+                                    case 2:
+                                        currentHead = headDown;
+                                        break;
+                                    case 3:
+                                        currentHead = headLeft;
+                                        break;
+                                    case 4:
+                                        currentHead = headRight;
+                                        break;
+                                }
+                                currentHead.draw();
                             }
-                            cargarCara();
-                            switch (heading) {
-                                case 1:
-                                    currentHead = headUp;
-                                    break;
-                                case 2:
-                                    currentHead = headDown;
-                                    break;
-                                case 3:
-                                    currentHead = headLeft;
-                                    break;
-                                case 4:
-                                    currentHead = headRight;
-                                    break;
+                        }
+                        if (-camera.camX + input.getMouseX() / camera.getGameScale() > x + 60 && -camera.camX + input.getMouseX() / camera.getGameScale() < x + 115) {
+                            if (-camera.camY + input.getMouseY() / camera.getGameScale() > y - 10 && -camera.camY + input.getMouseY() / camera.getGameScale() < y + 10) {
+                                flechaispress = 2;
+                                if (numberHead == 1) {
+                                    data_cara = "data/head2.png";
+                                    numberHead = 2;
+                                } else if (numberHead == 2) {
+                                    data_cara = "data/head.png";
+                                    numberHead = 1;
+                                }
+                                cargarCara();
+                                switch (heading) {
+                                    case 1:
+                                        currentHead = headUp;
+                                        break;
+                                    case 2:
+                                        currentHead = headDown;
+                                        break;
+                                    case 3:
+                                        currentHead = headLeft;
+                                        break;
+                                    case 4:
+                                        currentHead = headRight;
+                                        break;
+                                }
+                                currentHead.draw();
                             }
-                            currentHead.draw();
                         }
                     }
+                } else {
+                    flechaispress = 0;
                 }
             }
 
-        } else {
+        }
+        if (!personalization) {
             camera.setGameScale(1f);
         }
         /*if (numberHead == 1) {
@@ -218,9 +259,34 @@ public class Player extends Agent {
             sprite.start();
         }
         if (personalization) {
-            flechad.draw(x - 60, y);
-            flechai.setRotation(180f);
-            flechai.draw(x + 60, y);
+            flechaizqc.draw(x - 60, y - 10);
+            flechaderc.setRotation(180f);
+            flechaderc.draw(x + 60, y - 10);
+
+            flechadercu.draw(x + 60, y + 30);
+            flechadercu.setRotation(180f);
+            flechaizqcu.draw(x - 60, y + 30);
+
+            if (flechaispress == 1) {
+                flechapress.draw(x - 60, y - 10);
+                //flechaispress = 0;
+            }
+            switch (flechaispress) {
+                case 1:
+                    flechapress.setRotation(0f);
+                    flechapress.draw(x - 60, y - 10);
+                    break;
+                case 2:
+                    flechapress.setRotation(180f);
+                    flechapress.draw(x + 60, y - 10);
+                    break;
+                case 3:
+                    currentHead = headLeft;
+                    break;
+                case 4:
+                    currentHead = headRight;
+                    break;
+            }
         }
 
     }
