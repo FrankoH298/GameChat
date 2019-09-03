@@ -38,7 +38,7 @@ public class Agent {
     public Agent(float x, float y, Slick2D slick) {
         this.x = x;
         this.y = y;
-        this.CollisionBox = new CollisionBorder(x, y - 20, 50, 100);
+        this.CollisionBox = new CollisionBorder(x, y - 70, 30, 30);
         blocked = new boolean[4];
         this.mapa1 = slick.mapa1;
     }
@@ -90,8 +90,8 @@ public class Agent {
         if (!standing) {
             standing = true;
         }
-        this.CollisionBox.setX(x);
-        this.CollisionBox.setY(y - 20);
+        this.CollisionBox.setX(x + 10);
+        this.CollisionBox.setY(y + 50);
     }
 
     public float getX() {

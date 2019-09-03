@@ -1,14 +1,10 @@
 package slick2d;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.lwjgl.util.Timer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.SpriteSheet;
 
 /**
  *
@@ -77,7 +73,6 @@ public class Player extends Agent {
                         if (-camera.camX + input.getMouseX() / camera.getGameScale() > x - 60 && -camera.camX + input.getMouseX() / camera.getGameScale() < x) {
                             if (-camera.camY + input.getMouseY() / camera.getGameScale() > y - 10 && -camera.camY + input.getMouseY() / camera.getGameScale() < y + 10) {
                                 flechaispress = 1;
-                                System.out.println("aeg");
                                 if (numberHead == 1) {
                                     data_cara = "data/head2.png";
                                     numberHead = 2;
@@ -136,7 +131,6 @@ public class Player extends Agent {
                         if (-camera.camX + input.getMouseX() / camera.getGameScale() > x - 60 && -camera.camX + input.getMouseX() / camera.getGameScale() < x) {
                             if (-camera.camY + input.getMouseY() / camera.getGameScale() > y + 36 && -camera.camY + input.getMouseY() / camera.getGameScale() < y + 57) {
                                 flechaispress = 3;
-                                System.out.println("aeg");
                                 if (numberHead == 1) {
                                     data_cara = "data/head2.png";
                                     numberHead = 2;
@@ -166,7 +160,6 @@ public class Player extends Agent {
                         if (-camera.camX + input.getMouseX() / camera.getGameScale() > x + 60 && -camera.camX + input.getMouseX() / camera.getGameScale() < x + 115) {
                             if (-camera.camY + input.getMouseY() / camera.getGameScale() > y + 36 && -camera.camY + input.getMouseY() / camera.getGameScale() < y + 57) {
                                 flechaispress = 4;
-                                System.out.println("aeg");
                                 if (numberHead == 1) {
                                     data_cara = "data/head2.png";
                                     numberHead = 2;
@@ -193,7 +186,7 @@ public class Player extends Agent {
                             }
                         }
                     }
-                    
+
                 } else {
                     flechaispress = 0;
                 }
@@ -242,8 +235,8 @@ public class Player extends Agent {
         } else {
             standing = true;
         }
-        this.CollisionBox.setX(x);
-        this.CollisionBox.setY(y - 20);
+        this.CollisionBox.setX(x + 10);
+        this.CollisionBox.setY(y + 50);
     }
 
     public void moveUp(int delta) {
@@ -325,10 +318,6 @@ public class Player extends Agent {
             flechaizqc.draw(x - 60, y - 10);
             flechaderc.setRotation(180f);
             flechaderc.draw(x + 60, y - 10);
-
-            flechadercu.draw(x + 60, y + 30);
-            flechadercu.setRotation(180f);
-            flechaizqcu.draw(x - 60, y + 30);
 
             if (flechaispress == 1) {
                 flechapress.draw(x - 60, y - 10);

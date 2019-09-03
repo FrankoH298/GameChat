@@ -80,7 +80,6 @@ public class map {
                     for (int b = 0; b < 200; b++) {
                         if (map.getTileId(a, b, d) != 0) {
                             addColision(a * 32, b * 32, 32, 32);
-                            System.out.println(a + "+" + b);
                         }
                     }
                 }

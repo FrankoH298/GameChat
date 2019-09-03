@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.4" orientation="orthogonal" renderorder="right-down" width="200" height="200" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="1">
+ <tileset firstgid="1" name="Castle2" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="Castle2.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="257" name="PathAndObjects" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="PathAndObjects.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="513" name="mountain_landscape" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="mountain_landscape.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="769" name="hyptosis_tile-art-batch-1" tilewidth="32" tileheight="32" tilecount="900" columns="30">
+  <image source="hyptosis_tile-art-batch-1.png" width="960" height="960"/>
+ </tileset>
+ <tileset firstgid="1669" name="textures" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="textures.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="1925" name="[Base]BaseChip_pipo" tilewidth="32" tileheight="32" tilecount="1064" columns="8">
+  <image source="Pipoya RPG Tileset 32x32/[Base]BaseChip_pipo.png" width="256" height="4256"/>
+ </tileset>
+ <layer id="5" name="solid" width="200" height="200">
+  <properties>
+   <property name="solid" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3ZMQqAMAxA0c7e/wZe1FWFFANZTN4DB5E69VNb1wIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/uA8chdMkpnzOmGa7PqhDyap7kNXdPKes/f73bOv78uOh870ATF9QEwfdFS1f9YHHVWdMekDYs53AQCefA9BbPf/HKazfgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMxzAX4z7SgAcQIA
+  </data>
+ </layer>
+ <layer id="6" name="Capa de Patrones 1" width="200" height="200">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3czbXbRBiA4TurCx1AH6EDKAAOsA8k2fNbwaUDUgCQBggVJFSQpCGsAzootnQsySPNN6Nn8WycxMfXmdffjKXkRbq7ewEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKzy28nvlfgjwPvFMfRdvKyMRtjDn6n8WtcIkQz3UqXXuEaIota91DXOJORQ817KLGELLe2lNEJOXRul1+ve/grwvhNbq+cMM4RbHXFmaIQ5tKERprX+/dRSziIM6eOSayP09DHOHDm2o39fNYcZclzmxvpGbr2vX3fx6WO+8/Wd+zn1Eo8+YtFLHK55xKeTcsyOepgp+mBZK3rZjr1VO3SSn9nRHjOlnT6+PPlqpq8Lv9YalV5ftSvdx5OTpzM9K/xaa2SO6IPrNLJchLP5jyc/nfnw/u7ug/vLx38O8HprZpYss+fs+DzNP2d8fGrjo3vnkq1oJF4fT06+SfP3UkvYd2kkt733Vl0f3Vp+SJf7prV+Sfq4hf3WtL3P5X0fOdfyFs95RDqJ3cecayBjZwx95KWReH10bTxP188Yv6bLRvSRn1kSq4/+8TXncH1sw7+1P0Yf+lnv6DOkVB/dPml4rpizt3p65c+ePz7n10uvvxocuZG9+3ic/r3+sdU1kKVKr71aHPU8UqqPRyffD/TXMOZ4SO9f//jkv+c8f3yO0uuuJkc8j5TqI/f5o3vOb3f+WY7oaDNEH2gkfh/d/btz9lgP6fL+XX3s7yjnkSh99I1cOy+M3duuj3JabyRSH2vpo6yWG9EHObTaSKk+Pk3X70X84szU7/ss6SOCFhspeX0wN32U11oje/fxXXr/umBOP+z8s9B+I6X/3xLa1Mr3v/pgS7U38irAe0jbam7kTTJD2Fbt9zXqgy3pA6bpA6bpA6bV3ofvsNhS7X28CfAe0q7a+zBD2FILfbgOwlZa6KOjD7bQSh/2WGyhlT66PZZGyK2VPvpG7LPIqaU+OmYIOf2dyq9pM4SIutnxLpVf02YIEbW2txrOEI1wq9b2VueN2GexVtdGi3urITOEpV6nY7TRzxCNbL+elir9mqd054236RhtDBuxz9qmhe5z9u0KUT+zWj2PXxP176MmYy2s/Zzt53qUuTLsvfRaLcE+67a1s8V+vPs7Oe9trJmtuhmbgUfaV2nkdv3a2WvdjDUz1k2O3jUx/v47i0yvm/OzRZS1c97N1Jy5Zu/ea2SGXHaR82xRope5Iv9MUdhn/c/nKWOOvs+Ktn8inn4PW3qtmhlE1O9hh2e90mvXzCCa4VmvxVZ8b0MuU61EuMa7hi7YytxrVRG7sZeilKXd7N2SmUFES65Z5bxf4uXgecwMWjB2v8Qt+6j+ebRBi7pe3EsE0+buzcwKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIvkHi4j60wBxAgA=
+  </data>
+ </layer>
+ <layer id="7" name="Capa de patrones 2" width="200" height="200">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3avS4EURjH4Teh2JlxG6hQ4QpQWRdChVapVG7po/FxC0ql0i24gu0pvGIKm5iJZBOye54n+TWTyeQ0/5xmIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYPZdNBFn2WV2lV1nN83P777VEe/1354P/tMot3Ce3WZ32X328G0fr/VXnxby+WLHdmBejX95JzS5jaWefTxW/UHJnqr+oGTPVX9QspeqPyjZTm5gt6M9+2BGHQ4ijgbTf8c+mEcnuY3T7HjKjdgHdNvPDQw7OrAPAKBAy03EStuq/0hgwlpuYr1twz5gwmZuYqtt2z4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACK8AH/yBMoAHECAA==
+  </data>
+ </layer>
+ <layer id="8" name="Capa de patrones 3" width="200" height="200">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3ToQqAMBQF0CWDA4vJbFw0+v//pUWwvInJyc6BB7u88sJuSgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAH8z53UBPyvnn19uU4H1l6MmW41zbQQ/0A2J7jnNtBwAA0KJl/PoCaNOgGxCa9AMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADg0QHVydZCAHECAA==
+  </data>
+ </layer>
+</map>
