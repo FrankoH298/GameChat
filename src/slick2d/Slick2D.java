@@ -86,8 +86,8 @@ public class Slick2D extends BasicGame {
         chat.render(gc, g, personaje.CollisionBox.getX() - (chat.getWidth() / 2) + personaje.CollisionBox.getHalfX(), personaje.CollisionBox.getY() + personaje.CollisionBox.yDistance2 + (chat.getHeight() / 2));
         consola.render(gc, g, camera);
         //g.setAntiAlias(true);
-        g.drawString("X:" + Integer.toString(Math.round(personaje.getX())),-camera.camX, -camera.camY + gc.getHeight() / camera.getGameScale() - 180);
-        g.drawString("Y:" + Integer.toString(Math.round(personaje.getY())), -camera.camX , -camera.camY + gc.getHeight() / camera.getGameScale() - 160);
+        g.drawString("X:" + Integer.toString(Math.round(personaje.getX())), -camera.camX, -camera.camY + gc.getHeight() / camera.getGameScale() - 180);
+        g.drawString("Y:" + Integer.toString(Math.round(personaje.getY())), -camera.camX, -camera.camY + gc.getHeight() / camera.getGameScale() - 160);
         //g.drawString(Float.toString(-camera.camX + gc.getInput().getMouseX() / camera.getGameScale()), -camera.camX + gc.getInput().getMouseX() / camera.getGameScale() + 30, -camera.camY + gc.getInput().getMouseY() / camera.getGameScale());
         //g.drawString(Float.toString(-camera.camY + gc.getInput().getMouseY() / camera.getGameScale()), -camera.camX + gc.getInput().getMouseX() / camera.getGameScale() + 30, -camera.camY + gc.getInput().getMouseY() / camera.getGameScale() + 20);
         //g.setAntiAlias(false);

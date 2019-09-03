@@ -18,17 +18,26 @@ public class Bot extends Agent {
     public void updatePlayer(float x, float y) {
         if (this.x != x) {
             if (this.x < x) {
-                moveRight();
+                for (int i = 0; i < 30; i++) {
+                    moveRight();
+                }
+
             } else {
-                moveLeft();
+                for (int i = 0; i < 30; i++) {
+                    moveLeft();
+                }
             }
             this.x = x;
         }
         if (this.y != y) {
             if (this.y < y) {
-                moveDown();
+                for (int i = 0; i < 30; i++) {
+                    moveDown();
+                }
             } else {
-                moveUp();
+                for (int i = 0; i < 30; i++) {
+                    moveUp();
+                }
             }
             this.y = y;
         }
