@@ -2,14 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
         <file>
-            <url>src/slick2d/Bot.java</url>
-            <bookmark id="1">
-                <name/>
-                <line>82</line>
-                <key/>
-            </bookmark>
-        </file>
-        <file>
             <url>src/slick2d/Player.java</url>
             <bookmark id="2">
                 <name/>
@@ -17,8 +9,27 @@
                 <key/>
             </bookmark>
         </file>
+        <file>
+            <url>src/slick2d/Bot.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>82</line>
+                <key/>
+            </bookmark>
+        </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Gino/Documents/GitHub/GameChat/src/slick2d/map.java</file>
+            <file>file:/C:/Users/Gino/Documents/GitHub/GameChat/src/slick2d/Chat.java</file>
+            <file>file:/C:/Users/Gino/Documents/GitHub/GameChat/src/slick2d/ClienteChat.java</file>
+            <file>file:/C:/Users/Gino/Documents/GitHub/GameChat/src/slick2d/CollisionBorder.java</file>
+            <file>file:/C:/Users/Gino/Documents/GitHub/GameChat/src/slick2d/Console.java</file>
+            <file>file:/C:/Users/Gino/Documents/GitHub/GameChat/src/slick2d/Player.java</file>
+            <file>file:/C:/Users/Gino/Documents/GitHub/GameChat/src/slick2d/Agent.java</file>
+            <file>file:/C:/Users/Gino/Documents/GitHub/GameChat/src/slick2d/Slick2D.java</file>
+            <file>file:/C:/Users/Gino/Documents/GitHub/GameChat/src/slick2d/Camera.java</file>
+            <file>file:/C:/Users/Gino/Documents/GitHub/GameChat/src/slick2d/Bot.java</file>
+        </group>
     </open-files>
 </project-private>
